@@ -1,0 +1,19 @@
+{
+  "name": "test_song",
+  "bpm": 120,
+  "notes": [
+    {"time": 2.0, "direction": 0},
+    {"time": 2.5, "direction": 1},
+    {"time": 3.0, "direction": 2},
+    {"time": 3.5, "direction": 3},
+    {"time": 4.0, "direction": 0},
+    {"time": 4.1, "direction": 2},
+    {"time": 4.5, "direction": 1},
+    {"time": 4.6, "direction": 3},
+    {"time": 5.5, "direction": 0},
+    {"time": 5.7, "direction": 1},
+    {"time": 5.9, "direction": 2},
+    {"time": 6.1, "direction": 3},
+    {"time": 6.3, "direction": 0}
+  ]
+}

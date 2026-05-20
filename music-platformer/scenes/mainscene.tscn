@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bxfvbuhmnr421"]
+
+[ext_resource type="PackedScene" uid="uid://fa5p8w8xfrpw" path="res://scenes/player.tscn" id="1_plyr"]
+[ext_resource type="Script" uid="uid://chgkv7gpkmpil" path="res://scripts/charting.gd" id="2_golqe"]
+[ext_resource type="PackedScene" path="res://scenes/note.tscn" id="3_note"]
+[ext_resource type="FontFile" uid="uid://dti8w7hdgwtbb" path="res://assets/Minecart LCD.ttf" id="5_mo382"]
+
+[node name="mainscene" type="Node2D" unique_id=291595976]
+metadata/_edit_horizontal_guides_ = [369.0]
+metadata/_edit_vertical_guides_ = [576.0]
+
+[node name="Player" parent="." unique_id=476078559 instance=ExtResource("1_plyr")]
+position = Vector2(576, 369)
+
+[node name="Conductor" type="Node2D" parent="." unique_id=971372261]
+script = ExtResource("2_golqe")
+note_scene = ExtResource("3_note")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Conductor" unique_id=629015777]
+
+[node name="Accuracy" type="Label" parent="." unique_id=81287481]
+offset_left = 1038.0
+offset_top = 2.0
+offset_right = 1313.0
+offset_bottom = 68.0
+theme_override_fonts/font = ExtResource("5_mo382")
+theme_override_font_sizes/font_size = 25
+text = "Accuracy:"
+
+[node name="Percentage" type="Label" parent="." unique_id=205019917]
+offset_left = 1037.0
+offset_top = 40.0
+offset_right = 1199.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("5_mo382")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+
+[node name="Combo" type="Label" parent="." unique_id=2016349585]
+offset_left = 495.0
+offset_top = 149.0
+offset_right = 662.0
+offset_bottom = 197.0
+theme_override_fonts/font = ExtResource("5_mo382")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1

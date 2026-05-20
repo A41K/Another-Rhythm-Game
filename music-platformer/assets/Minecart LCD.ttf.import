@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://dti8w7hdgwtbb"
+path="res://.godot/imported/Minecart LCD.ttf-1219c2396a030e89f833371f1602c512.fontdata"
+
+[deps]
+
+source_file="res://assets/Minecart LCD.ttf"
+dest_files=["res://.godot/imported/Minecart LCD.ttf-1219c2396a030e89f833371f1602c512.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
