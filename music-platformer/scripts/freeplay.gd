@@ -182,7 +182,7 @@ func load_songs():
 						
 						temp_groups[base_name]["files"][difficulty] = data
 						if not temp_groups[base_name].has("meta"):
-							temp_groups[base_name]["meta"] = data # Save first found metadata
+							temp_groups[base_name]["meta"] = data 
 			file_name = dir.get_next()
 	
 	for key in temp_groups.keys():
@@ -234,7 +234,6 @@ func play_selected_song():
 	var diff_to_play = current_difficulty
 	
 	if not group["files"].has(diff_to_play):
-		# Fallback to whatever is available
 		if group["files"].keys().size() > 0:
 			diff_to_play = group["files"].keys()[0]
 	
@@ -249,7 +248,6 @@ func play_selected_song():
 func select_song(idx: int):
 	selected_index = idx
 	
-	# Determine best default difficulty if what they clicked doesn't have it
 	var group = songs[idx]
 	if not group["files"].has(current_difficulty):
 		if group["files"].has("normal"): current_difficulty = "normal"
@@ -281,12 +279,7 @@ func update_difficulty_display():
 
 	var rating = int(active_data.get("rating", 3))
 	for i in range(5):
-		var star = Label.new()
-		star.text = "★" if i < rating else "☆"
-		star.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		star.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		star.add_theme_font_size_override("font_size", 32)
-		star.add_theme_color_override("font_color", Color.WHITE)
+		var star = StarIcon.new(i < rating)
 
 		var star_style = StyleBoxFlat.new()
 		star_style.bg_color = Color.TRANSPARENT
@@ -298,6 +291,7 @@ func update_difficulty_display():
 
 		var panel = PanelContainer.new()
 		panel.add_theme_stylebox_override("panel", star_style)
+		panel.custom_minimum_size = Vector2(40, 40)
 		panel.add_child(star)
 
 		stars_container.add_child(panel)
@@ -334,3 +328,30 @@ func _update_song_score_display(song_group: Dictionary):
 		return
 
 	freeplay_score_label.text = str(Global.get_song_score(key))
+
+class StarIcon extends Control:
+	var is_filled: bool = false
+	
+	func _init(filled: bool):
+		is_filled = filled
+		custom_minimum_size = Vector2(32, 32)
+		size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		
+	func _draw():
+		var points = PackedVector2Array()
+		var center = size / 2.0
+		var r_out = min(size.x, size.y) / 2.0 * 0.8
+		var r_in = r_out * 0.4
+		var angle_offset = -PI / 2.0
+		
+		for i in range(10):
+			var r = r_out if i % 2 == 0 else r_in
+			var a = angle_offset + i * (PI / 5.0)
+			points.append(center + Vector2(cos(a), sin(a)) * r)
+			
+		if is_filled:
+			draw_colored_polygon(points, Color.WHITE)
+		else:
+			points.append(points[0])
+			draw_polyline(points, Color.WHITE, 2.0, true)

@@ -27,7 +27,6 @@ func _try_deflect_from_shield_overlap():
 	if not player_node.is_position_in_shield_arc(global_position):
 		return
 
-	# Deflects only count after crossing inside the yellow ring.
 	var dist = global_position.distance_to(target_position)
 	if dist > player_node.GOOD_RADIUS:
 		return
@@ -70,22 +69,18 @@ func _process(delta):
 	
 	var travel_dir = (spawn_position - target_position).normalized()
 	
-	# We want the note to hit right on the yellow ring on beat
 	var target_hit_dist = player_node.GOOD_RADIUS
 	var dist_from_center = max(0.0, target_hit_dist + (speed * time_left))
 	global_position = target_position + travel_dir * dist_from_center
 
-	# If it gets into the core area without being deflected, count as a miss immediately.
 	if current_time > hit_time and global_position.distance_to(target_position) <= player_node.DEAD_ZONE_RADIUS:
 		miss()
 		return
 	
-	# Time-based miss detection is more reliable than distance checks.
 	if (current_time - hit_time) > player_node.MISS_WINDOW:
 		miss()
 		return
 
-	# Area2D signals can miss fast teleports; polling overlap keeps deflect reliable.
 	_try_deflect_from_shield_overlap()
 
 func _on_area_entered(area: Area2D):
@@ -96,7 +91,6 @@ func _on_area_entered(area: Area2D):
 	if not player_node.get("player_cover"):
 		return
 
-	# Only the actual shield hitbox can deflect notes.
 	if area != player_node.player_cover:
 		return
 	if not player_node or not player_node.has_method("is_position_in_shield_arc"):
@@ -104,7 +98,6 @@ func _on_area_entered(area: Area2D):
 	if not player_node.is_position_in_shield_arc(global_position):
 		return
 
-	# Deflects only count after crossing inside the yellow ring.
 	var dist = global_position.distance_to(target_position)
 	if dist > player_node.GOOD_RADIUS:
 		return

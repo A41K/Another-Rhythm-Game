@@ -111,7 +111,6 @@ func try_hit_note(dir: int):
 			if time_error > MISS_WINDOW:
 				continue
 
-			# Slightly prefer notes that are due now or just passed to avoid skipping.
 			var score = time_error + (0.015 if time_delta > 0.0 else 0.0)
 			if score < best_score:
 				best_score = score
