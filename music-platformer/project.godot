@@ -13,7 +13,7 @@ config_version=5
 config/name="Another Rhythm Game"
 run/main_scene="uid://bawjf4aiwsdyw"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cyebid7kxyysg"
 
 [autoload]
 
@@ -23,6 +23,7 @@ Global="*res://scripts/global.gd"
 
 window/size/viewport_width=1200
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
