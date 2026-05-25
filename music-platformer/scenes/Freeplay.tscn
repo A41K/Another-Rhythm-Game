@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://bawjf4aiwsdyw"]
+
+[ext_resource type="Script" uid="uid://dlswcb5ubonl3" path="res://scripts/freeplay.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://dti8w7hdgwtbb" path="res://assets/Minecart LCD.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.08, 0.08, 0.08, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diff_easy"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.2, 0.8, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diff_hard"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.9, 0.4, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cover"]
+bg_color = Color(0.05, 0.05, 0.05, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+
+[node name="Freeplay" type="Control" unique_id=2011126152]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="Panel" parent="." unique_id=236034524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Title" type="Label" parent="." unique_id=410299930]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 32.0
+offset_right = 200.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 64
+text = "Freeplay"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="." unique_id=1159229719]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = 56.0
+offset_right = -58.0
+offset_bottom = 114.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_back")
+text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=131762513]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1824443206]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="LeftPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1645470112]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="SongName" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=668506258]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "song name"
+
+[node name="Stars" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=905309620]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="LevelInfo" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=270455183]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Easy" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LevelInfo" unique_id=1952606687]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_diff_easy")
+text = " Easy "
+
+[node name="Hard" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LevelInfo" unique_id=1003126606]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_diff_hard")
+text = " Hard "
+
+[node name="BPM" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LevelInfo" unique_id=1005551559]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "BPM"
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=713679319]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="CoverContainer" type="Control" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=904734760]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Vinyl" type="Control" parent="MarginContainer/HBoxContainer/LeftPanel/CoverContainer" unique_id=105540058]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_right = 150.0
+grow_vertical = 2
+
+[node name="Cover" type="Panel" parent="MarginContainer/HBoxContainer/LeftPanel/CoverContainer" unique_id=1861530908]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -140.0
+offset_right = 280.0
+offset_bottom = 140.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cover")
+
+[node name="CoverTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/LeftPanel/CoverContainer/Cover" unique_id=134987523]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoverLabel" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/CoverContainer/Cover" unique_id=922473615]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 48
+text = "Cover"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightPanel" type="Control" parent="MarginContainer/HBoxContainer" unique_id=234395147]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/RightPanel" unique_id=982030582]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/ScrollContainer" unique_id=2030544082]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="SongName" type="Label" parent="." unique_id=1957415761]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 643.0
+offset_right = 361.0
+offset_bottom = 697.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "Score:"
+
+[node name="ScoreValue" type="Label" parent="." unique_id=782344910]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 643.0
+offset_right = 499.0
+offset_bottom = 689.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "0"

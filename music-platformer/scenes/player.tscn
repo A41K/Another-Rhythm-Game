@@ -3,14 +3,30 @@
 [ext_resource type="Script" uid="uid://cskkd3ovnth0o" path="res://scripts/player.gd" id="1_playr"]
 [ext_resource type="Texture2D" uid="uid://cm8qtaky5bh53" path="res://assets/player.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://cmhnn5e3byuf6" path="res://assets/player_eyes.png" id="3_eyes"]
+[ext_resource type="Texture2D" uid="uid://bh7w6hh7ifih3" path="res://assets/player-cover.png" id="4_cover"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cover"]
+radius = 24.0
+
+[node name="Player" type="Node2D" unique_id=138293959]
 script = ExtResource("1_playr")
 
-[node name="PlayerTexture" type="Sprite2D" parent="."]
+[node name="PlayerTexture" type="Sprite2D" parent="." unique_id=50690837]
 scale = Vector2(0.3515625, 0.3515625)
 texture = ExtResource("2_g2els")
 
-[node name="Eyes" type="Sprite2D" parent="."]
+[node name="Eyes" type="Sprite2D" parent="." unique_id=351217590]
 scale = Vector2(0.3515625, 0.3515625)
 texture = ExtResource("3_eyes")
+
+[node name="PlayerCover" type="Area2D" parent="." unique_id=1119482215]
+position = Vector2(0, -84)
+monitoring = true
+monitorable = true
+
+[node name="CoverSprite" type="Sprite2D" parent="PlayerCover" unique_id=1494222161]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("4_cover")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCover" unique_id=490161348]
+shape = SubResource("CircleShape2D_cover")
