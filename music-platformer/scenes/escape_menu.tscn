@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://4xjgpib6j76"]
+
+[ext_resource type="Script" uid="uid://6sm05qhsrqby" path="res://scripts/escape_menu.gd" id="1_qsd2a"]
+[ext_resource type="FontFile" uid="uid://dti8w7hdgwtbb" path="res://assets/Minecart LCD.ttf" id="2_07klu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sluh"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[node name="EscapeMenu" type="Control" unique_id=1256783179]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qsd2a")
+
+[node name="Back" type="ColorRect" parent="." unique_id=1546604556]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1199.0
+offset_bottom = 727.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6509804)
+
+[node name="return" type="Button" parent="." unique_id=436918621]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 256.0
+offset_right = 803.0
+offset_bottom = 314.0
+theme_override_fonts/font = ExtResource("2_07klu")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_5sluh")
+text = "Return"
+
+[node name="back to freeplay" type="Button" parent="." unique_id=306351653]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 361.0
+offset_right = 802.0
+offset_bottom = 419.0
+theme_override_fonts/font = ExtResource("2_07klu")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_5sluh")
+text = " Go back to Freeplay"

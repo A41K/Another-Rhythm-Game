@@ -29,7 +29,7 @@ var total_accuracy_score: float = 0.0
 @onready var cover_sprite: Sprite2D = $PlayerCover/CoverSprite
 @onready var cover_hitbox: CollisionShape2D = $PlayerCover/CollisionShape2D
 const EYES_MAX_DIST: float = 15.0
-const EYES_SPEED: float = 15.0
+const EYES_SPEED: float = 30.0
 
 @onready var accuracy_label: Label = get_parent().get_node_or_null("Percentage")
 @onready var combo_label: Label = get_parent().get_node_or_null("Combo")
@@ -39,6 +39,7 @@ var original_combo_pos: Vector2 = Vector2.ZERO
 
 func _ready():
 	add_to_group("Player")
+	
 	if player_cover:
 		player_cover.monitoring = true
 		player_cover.monitorable = true

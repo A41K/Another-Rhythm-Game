@@ -1,14 +1,8 @@
 [gd_scene format=3 uid="uid://bawjf4aiwsdyw"]
 
 [ext_resource type="Script" uid="uid://dlswcb5ubonl3" path="res://scripts/freeplay.gd" id="1_script"]
+[ext_resource type="StyleBox" uid="uid://kbcij06nrutb" path="res://assets/new_style_box_flat.tres" id="2_7munn"]
 [ext_resource type="FontFile" uid="uid://dti8w7hdgwtbb" path="res://assets/Minecart LCD.ttf" id="2_font"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
-bg_color = Color(0.08, 0.08, 0.08, 1)
-border_width_left = 15
-border_width_top = 15
-border_width_right = 15
-border_width_bottom = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back"]
 bg_color = Color(0.1, 0.1, 0.1, 1)
@@ -56,7 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+theme_override_styles/panel = ExtResource("2_7munn")
 
 [node name="Title" type="Label" parent="." unique_id=410299930]
 layout_mode = 1

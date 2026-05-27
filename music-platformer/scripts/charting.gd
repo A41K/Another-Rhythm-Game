@@ -26,7 +26,52 @@ var time_begin: int = 0
 @onready var result_score_label: Label = get_parent().get_node_or_null("ResultsOverlay/Summary/ResultScore")
 @onready var result_misses_label: Label = get_parent().get_node_or_null("ResultsOverlay/Summary/ResultMisses")
 
+var escape_menu_scene = preload("res://scenes/escape_menu.tscn")
+
+var intro_delay: float = 3.0
+var in_intro: bool = true
+var bpm: float = 120.0
+var sec_per_beat: float = 0.5
+var last_intro_beat: int = -999
+var metronome_player: AudioStreamPlayer
+
+var visual_fade_rect: ColorRect
+var target_volume_db: float = 0.0
+var audio_fade_duration: float = 2.0
+var audio_fade_timer: float = 0.0
+
+func create_beep() -> AudioStreamWAV:
+	var wav = AudioStreamWAV.new()
+	wav.format = AudioStreamWAV.FORMAT_16_BITS
+	wav.mix_rate = 44100
+	var data = PackedByteArray()
+	var length_frames = int(44100 * 0.05) # 50ms
+	data.resize(length_frames * 2)
+	for i in range(length_frames):
+		var val = int(sin(i * TAU * 880.0 / 44100.0) * 16000.0)
+		data[i * 2] = val & 0xFF
+		data[i * 2 + 1] = (val >> 8) & 0xFF
+	wav.data = data
+	return wav
+
 func _ready():
+	visual_fade_rect = ColorRect.new()
+	visual_fade_rect.color = Color.BLACK
+	visual_fade_rect.anchor_right = 1.0
+	visual_fade_rect.anchor_bottom = 1.0
+	visual_fade_rect.size = get_viewport_rect().size
+	var fade_canvas = CanvasLayer.new()
+	fade_canvas.layer = 90
+	fade_canvas.add_child(visual_fade_rect)
+	add_child(fade_canvas)
+
+	if escape_menu_scene:
+		var canvas = CanvasLayer.new()
+		var esc_menu = escape_menu_scene.instantiate()
+		canvas.add_child(esc_menu)
+		canvas.layer = 100 
+		get_parent().call_deferred("add_child", canvas)
+		
 	if Global.current_song_name != "":
 		song_name = Global.current_song_name
 	var selected_song_data := Global.current_song_data
@@ -48,6 +93,9 @@ func _ready():
 			elif chart_data.has("note_speed"):
 				note_speed = max(1.0, float(chart_data["note_speed"]))
 				approach_time = spawn_distance / note_speed
+			if chart_data.has("bpm"):
+				bpm = float(chart_data["bpm"])
+				sec_per_beat = 60.0 / bpm
 			if chart_data.has("input_offset"):
 				input_offset = float(chart_data["input_offset"])
 			if chart_data.has("max_spawns_per_frame"):
@@ -77,7 +125,8 @@ func _ready():
 			audio_path = explicit_audio
 	if ResourceLoader.exists(audio_path):
 		audio_player.stream = load(audio_path)
-		audio_player.play()
+		target_volume_db = audio_player.volume_db
+		audio_player.volume_db = -80.0
 		has_audio_stream = true
 	else:
 		print("Audio not found: ", audio_path, ". Proceeding with silent chart sequence.")
@@ -86,7 +135,13 @@ func _ready():
 	if results_overlay:
 		results_overlay.visible = false
 		
-	time_begin = Time.get_ticks_usec()
+	metronome_player = AudioStreamPlayer.new()
+	metronome_player.stream = create_beep()
+	add_child(metronome_player)
+	
+	in_intro = true
+	var extra_usec = int(intro_delay * 1000000.0)
+	time_begin = Time.get_ticks_usec() + extra_usec
 
 func _get_score_key_from_song_name(name: String) -> String:
 	if name.ends_with("_easy"):
@@ -106,12 +161,39 @@ func _process(delta):
 			_return_to_freeplay()
 		return
 
-	if audio_player and audio_player.playing:
-		song_position = audio_player.get_playback_position() + AudioServer.get_time_since_last_mix()
-		song_position -= AudioServer.get_output_latency()
-	else:
+	if in_intro:
 		var time_passed = (Time.get_ticks_usec() - time_begin) / 1000000.0
 		song_position = time_passed
+		
+		if visual_fade_rect and intro_delay > 0:
+			var progress = (song_position + intro_delay) / intro_delay
+			visual_fade_rect.color.a = 1.0 - clamp(progress, 0.0, 1.0)
+		
+		var current_beat = floor(song_position / sec_per_beat)
+		if current_beat > last_intro_beat:
+			if last_intro_beat != -999 and song_position < 0.0:
+				metronome_player.play()
+			last_intro_beat = current_beat
+			
+		if song_position >= 0.0:
+			in_intro = false
+			if visual_fade_rect:
+				visual_fade_rect.color.a = 0.0
+			if has_audio_stream and audio_player:
+				audio_player.play()
+	else:
+		if has_audio_stream and audio_player and audio_fade_timer < audio_fade_duration:
+			audio_fade_timer += delta
+			var fade_progress = clamp(audio_fade_timer / audio_fade_duration, 0.0, 1.0)
+			var current_linear = lerp(0.0001, db_to_linear(target_volume_db), fade_progress)
+			audio_player.volume_db = linear_to_db(current_linear)
+
+		if audio_player and audio_player.playing:
+			song_position = audio_player.get_playback_position() + AudioServer.get_time_since_last_mix()
+			song_position -= AudioServer.get_output_latency()
+		else:
+			var time_passed = (Time.get_ticks_usec() - time_begin) / 1000000.0
+			song_position = time_passed
 
 	song_position += input_offset
 		
@@ -172,6 +254,9 @@ func _show_results():
 		result_score_label.text = "Final Score: " + str(final_score)
 	if result_misses_label:
 		result_misses_label.text = "Misses: " + str(misses)
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	if results_overlay:
 		results_overlay.visible = true
 

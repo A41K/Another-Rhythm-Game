@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://ertcj66f0q8t"]
+
+[ext_resource type="Script" uid="uid://cw1k0emug5ykw" path="res://scripts/titlescreen.gd" id="1_tt55a"]
+[ext_resource type="StyleBox" uid="uid://kbcij06nrutb" path="res://assets/new_style_box_flat.tres" id="2_t7v6v"]
+[ext_resource type="FontFile" uid="uid://dti8w7hdgwtbb" path="res://assets/Minecart LCD.ttf" id="3_vhbaf"]
+[ext_resource type="PackedScene" uid="uid://fa5p8w8xfrpw" path="res://scenes/player.tscn" id="4_t7v6v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6ms7"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[node name="Titlescreen" type="Node2D" unique_id=1914483633]
+script = ExtResource("1_tt55a")
+metadata/_edit_vertical_guides_ = [0.0]
+
+[node name="Panel" type="Panel" parent="." unique_id=652039758]
+offset_right = 1200.0
+offset_bottom = 720.0
+theme_override_styles/panel = ExtResource("2_t7v6v")
+
+[node name="Title" type="Label" parent="." unique_id=633855278]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = 136.0
+offset_right = 1184.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 64
+text = "Another Rhythm Game"
+horizontal_alignment = 1
+
+[node name="Freeplay" type="Button" parent="." unique_id=2091511909]
+offset_left = 405.0
+offset_top = 286.0
+offset_right = 775.0
+offset_bottom = 372.0
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_v6ms7")
+text = " Start Game "
+metadata/_edit_use_anchors_ = true
+
+[node name="Settings" type="Button" parent="." unique_id=1036887256]
+offset_left = 188.0
+offset_top = 425.0
+offset_right = 558.0
+offset_bottom = 511.0
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_v6ms7")
+text = " Settings "
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Button" parent="." unique_id=2089219254]
+offset_left = 626.0
+offset_top = 425.0
+offset_right = 996.0
+offset_bottom = 511.0
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_v6ms7")
+text = " Quit "
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." unique_id=138293959 instance=ExtResource("4_t7v6v")]
+position = Vector2(581, 660)
+
+[node name="Title2" type="Label" parent="." unique_id=2125259771]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 189.0
+offset_top = 220.0
+offset_right = 1004.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 32
+text = "A game by A41K"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Freeplay" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

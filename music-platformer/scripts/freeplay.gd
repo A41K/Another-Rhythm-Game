@@ -26,6 +26,7 @@ const COVER_EXTENSIONS := ["png", "jpg", "jpeg", "webp"]
 const AUDIO_EXTENSIONS := ["mp3", "ogg", "wav"]
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	vinyl.draw.connect(_on_vinyl_draw)
 	back_btn.pressed.connect(_on_back_pressed)
 	
@@ -311,8 +312,6 @@ func _on_hard_gui_input(event: InputEvent):
 func _on_back_pressed():
 	if ResourceLoader.exists("res://scenes/titlescreen.tscn"):
 		get_tree().change_scene_to_file("res://scenes/titlescreen.tscn")
-	elif ResourceLoader.exists("res://OLD ASSETS/scenes/titlescreen.tscn"):
-		get_tree().change_scene_to_file("res://OLD ASSETS/scenes/titlescreen.tscn")
 
 func _update_last_score_display():
 	if freeplay_score_label:
