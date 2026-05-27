@@ -4,6 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://kbcij06nrutb" path="res://assets/new_style_box_flat.tres" id="2_t7v6v"]
 [ext_resource type="FontFile" uid="uid://dti8w7hdgwtbb" path="res://assets/Minecart LCD.ttf" id="3_vhbaf"]
 [ext_resource type="PackedScene" uid="uid://fa5p8w8xfrpw" path="res://scenes/player.tscn" id="4_t7v6v"]
+[ext_resource type="Texture2D" uid="uid://bh4lev332nscg" path="res://assets/Promo_icon.png" id="5_vhbaf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6ms7"]
 bg_color = Color(0.1, 0.1, 0.1, 1)
@@ -90,6 +91,19 @@ theme_override_fonts/font = ExtResource("3_vhbaf")
 theme_override_font_sizes/font_size = 32
 text = "A game by A41K"
 horizontal_alignment = 1
+
+[node name="PromoIcon" type="Sprite2D" parent="." unique_id=1124435289]
+position = Vector2(-633, 341)
+texture = ExtResource("5_vhbaf")
+
+[node name="Label" type="Label" parent="." unique_id=581725989]
+offset_left = -693.0
+offset_top = 294.0
+offset_right = -571.0
+offset_bottom = 376.0
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 54
+text = "ARG"
 
 [connection signal="pressed" from="Freeplay" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
