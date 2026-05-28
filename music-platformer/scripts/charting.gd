@@ -246,7 +246,7 @@ func _show_results():
 	Global.last_song_name = song_name
 	if score_key == "":
 		score_key = _get_score_key_from_song_name(song_name)
-	Global.record_song_score(score_key, final_score)
+	Global.record_song_score(score_key, final_score, misses)
 
 	if result_song_label:
 		result_song_label.text = "Song: " + song_name

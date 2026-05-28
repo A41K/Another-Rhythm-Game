@@ -25,6 +25,7 @@ var total_notes: int = 0
 var total_accuracy_score: float = 0.0
 
 @onready var eyes: Sprite2D = $Eyes
+@onready var player_texture: Sprite2D = $PlayerTexture
 @onready var player_cover: Area2D = $PlayerCover
 @onready var cover_sprite: Sprite2D = $PlayerCover/CoverSprite
 @onready var cover_hitbox: CollisionShape2D = $PlayerCover/CollisionShape2D
@@ -40,6 +41,14 @@ var original_combo_pos: Vector2 = Vector2.ZERO
 func _ready():
 	add_to_group("Player")
 	
+	if player_texture:
+		var tex_path = "res://assets/" + Global.equipped_skin + ".png"
+		if ResourceLoader.exists(tex_path):
+			player_texture.texture = load(tex_path)
+		player_texture.scale = Vector2(0.352, 0.352)
+		if eyes:
+			eyes.scale = Vector2(0.352, 0.352)
+			
 	if player_cover:
 		player_cover.monitoring = true
 		player_cover.monitorable = true

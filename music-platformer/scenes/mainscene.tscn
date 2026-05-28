@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bxfvbuhmnr421"]
 
+[ext_resource type="StyleBox" uid="uid://kbcij06nrutb" path="res://assets/new_style_box_flat.tres" id="1_mo382"]
 [ext_resource type="PackedScene" uid="uid://fa5p8w8xfrpw" path="res://scenes/player.tscn" id="1_plyr"]
 [ext_resource type="Script" uid="uid://chgkv7gpkmpil" path="res://scripts/charting.gd" id="2_golqe"]
 [ext_resource type="PackedScene" path="res://scenes/note.tscn" id="3_note"]
@@ -8,6 +9,11 @@
 [node name="mainscene" type="Node2D" unique_id=291595976]
 metadata/_edit_horizontal_guides_ = [369.0]
 metadata/_edit_vertical_guides_ = [576.0]
+
+[node name="Panel" type="Panel" parent="." unique_id=527585626]
+offset_right = 1200.0
+offset_bottom = 720.0
+theme_override_styles/panel = ExtResource("1_mo382")
 
 [node name="Player" parent="." unique_id=476078559 instance=ExtResource("1_plyr")]
 position = Vector2(576, 369)
@@ -19,18 +25,18 @@ note_scene = ExtResource("3_note")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Conductor" unique_id=629015777]
 
 [node name="Accuracy" type="Label" parent="." unique_id=81287481]
-offset_left = 1032.0
-offset_top = 4.0
-offset_right = 1307.0
-offset_bottom = 70.0
+offset_left = 1027.0
+offset_top = 7.0
+offset_right = 1302.0
+offset_bottom = 73.0
 theme_override_fonts/font = ExtResource("5_mo382")
 theme_override_font_sizes/font_size = 25
 text = "Accuracy:"
 
 [node name="Percentage" type="Label" parent="." unique_id=205019917]
-offset_left = 1037.0
+offset_left = 1030.0
 offset_top = 40.0
-offset_right = 1199.0
+offset_right = 1192.0
 offset_bottom = 79.0
 theme_override_fonts/font = ExtResource("5_mo382")
 theme_override_font_sizes/font_size = 25
@@ -46,19 +52,19 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
 [node name="Accuracy2" type="Label" parent="." unique_id=59866100]
-offset_left = 5.0
-offset_top = 2.0
-offset_right = 280.0
-offset_bottom = 68.0
+offset_left = 17.0
+offset_top = 7.0
+offset_right = 292.0
+offset_bottom = 73.0
 theme_override_fonts/font = ExtResource("5_mo382")
 theme_override_font_sizes/font_size = 25
 text = "Score:"
 
 [node name="ScoreValue" type="Label" parent="." unique_id=136527419]
-offset_left = 5.0
-offset_top = 35.0
-offset_right = 167.0
-offset_bottom = 102.0
+offset_left = 17.0
+offset_top = 40.0
+offset_right = 179.0
+offset_bottom = 107.0
 theme_override_fonts/font = ExtResource("5_mo382")
 theme_override_font_sizes/font_size = 25
 text = "0"

@@ -75,6 +75,13 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="." unique_id=138293959 instance=ExtResource("4_t7v6v")]
 position = Vector2(581, 660)
 
+[node name="PlayerButton" type="Button" parent="."]
+offset_left = 510.0
+offset_top = 610.0
+offset_right = 650.0
+offset_bottom = 710.0
+flat = true
+
 [node name="Title2" type="Label" parent="." unique_id=2125259771]
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,9 +89,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 189.0
-offset_top = 220.0
+offset_top = 221.0
 offset_right = 1004.0
-offset_bottom = 316.0
+offset_bottom = 269.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vhbaf")
@@ -108,3 +115,4 @@ text = "ARG"
 [connection signal="pressed" from="Freeplay" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="PlayerButton" to="." method="_on_player_button_pressed"]
