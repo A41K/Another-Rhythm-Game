@@ -75,7 +75,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="." unique_id=138293959 instance=ExtResource("4_t7v6v")]
 position = Vector2(581, 660)
 
-[node name="PlayerButton" type="Button" parent="."]
+[node name="PlayerButton" type="Button" parent="." unique_id=591975181]
 offset_left = 510.0
 offset_top = 610.0
 offset_right = 650.0
@@ -111,6 +111,15 @@ offset_bottom = 376.0
 theme_override_fonts/font = ExtResource("3_vhbaf")
 theme_override_font_sizes/font_size = 54
 text = "ARG"
+
+[node name="Label2" type="Label" parent="." unique_id=759448247]
+offset_left = 537.0
+offset_top = 577.0
+offset_right = 625.0
+offset_bottom = 619.0
+theme_override_fonts/font = ExtResource("3_vhbaf")
+theme_override_font_sizes/font_size = 28
+text = "Skins"
 
 [connection signal="pressed" from="Freeplay" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
